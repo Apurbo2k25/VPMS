@@ -103,7 +103,7 @@ npm run dev
 
 # Challenges Faced
 
-# During the development of this project, I faced several practical challenges:
+## During the development of this project, I faced several practical challenges:
 
 - Designing a complete workflow between **Admin, Employee, Security, and Visitor** while maintaining proper role-based access.
 - Understanding how to upload and store visitor photos using **Multer** and serve them correctly to the frontend.
