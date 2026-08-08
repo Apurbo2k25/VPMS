@@ -156,26 +156,47 @@ Most of these challenges were completely new to me, so I spent time understandin
 
 ## 📷 Screenshots
 
+### Home Page
+
+<p align="center">
+  <img src="screenshots/Home-Page.png" width="800">
+</p>
+
 ### Login Page
 
-(Add Image)
+<p align="center">
+  <img src="screenshots/Login-Page.png" width="800">
+</p>
 
 ### Visitor Registration
 
-(Add Image)
+<p align="center">
+  <img src="screenshots/Visitor-Registration-Page.png" width="800">
+</p>
+
+### Visitor Room
+
+<p align="center">
+  <img src="screenshots/VisitorRoom-Page.png" width="800">
+</p>
 
 ### Admin Dashboard
 
-(Add Image)
+<p align="center">
+  <img src="screenshots/Admin-Dashboard.png" width="800">
+</p>
 
 ### Employee Dashboard
 
-(Add Image)
+<p align="center">
+  <img src="screenshots/Employee-Dashboard.png" width="800">
+</p>
 
 ### Security Dashboard
 
-(Add Image)
-
+<p align="center">
+  <img src="screenshots/Security-Dashboard.png" width="800">
+</p>
 ## 🎥 Demo
 
 (Add Google Drive / YouTube link)

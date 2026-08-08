@@ -184,7 +184,7 @@ function VisitorRoom() {
         <Link to="/" className="text-2xl font-bold text-indigo-600">
           VPMS
         </Link>
-        <div className="space-x-5">
+        <div className="space-x-5 font-semibold">
           <Link to="/" className="hover:text-indigo-600">
             Home
           </Link>
@@ -194,7 +194,7 @@ function VisitorRoom() {
         </div>
       </nav>
 
-      <div className="max-w-xl mx-auto mt-12 bg-white rounded-xl shadow p-8">
+      <div className="max-w-4xl mx-auto mt-12 bg-white rounded-xl shadow p-8">
         <h1 className="text-3xl font-bold text-center mb-2">Visitor Status</h1>
         <p className="text-center text-gray-500 mb-8">
           Your visitor request status will automatically update.
@@ -213,17 +213,18 @@ function VisitorRoom() {
         )}
 
         {visitor.status === "Approved" && (
-          <>
-            <div className="text-center text-green-600 text-6xl mb-4">✅</div>
-            <h2 className="text-xl font-bold text-center mb-2">
-              Request Approved
-            </h2>
-            <p className="text-center text-gray-600 mb-6">
-              Please present this QR Code at the Security Gate.
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            {/* Left Column: QR Code & Status */}
+            <div className="flex flex-col items-center border-b md:border-b-0 md:border-r border-gray-200 pb-6 md:pb-0 md:pr-6">
+              <div className="text-center text-green-600 text-6xl mb-2">✅</div>
+              <h2 className="text-xl font-bold text-center mb-2">
+                Request Approved
+              </h2>
+              <p className="text-center text-gray-600 mb-6 text-sm">
+                Please present this QR Code at the Security Gate.
+              </p>
 
-            <div className="flex justify-center mb-6">
-              <div className="bg-white p-4 border rounded-lg">
+              <div className="bg-white p-4 border rounded-lg mb-4">
                 <QRCodeSVG
                   id="qr-code-svg"
                   value={qrData}
@@ -231,43 +232,48 @@ function VisitorRoom() {
                   level="H"
                 />
               </div>
-            </div>
 
-            <button
-              onClick={() => {
-                navigator.clipboard.writeText(qrData);
-                alert("QR data copied!");
-              }}
-              className="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg"
-            >
-              Copy QR Data
-            </button>
-
-            <div className="bg-slate-100 rounded-lg p-4 mt-6 space-y-2">
-              <p>
-                <strong>Name:</strong> {visitor.name}
-              </p>
-              <p>
-                <strong>Email:</strong> {visitor.email}
-              </p>
-              <p>
-                <strong>Phone:</strong> {visitor.phone}
-              </p>
-              <p>
-                <strong>Purpose:</strong> {visitor.purpose}
-              </p>
-              <p>
-                <strong>Status:</strong>{" "}
-                <span className="text-green-600 font-semibold">Approved</span>
-              </p>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(qrData);
+                  alert("QR data copied!");
+                }}
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg text-sm"
+              >
+                Copy QR Data
+              </button>
             </div>
-            <button
-              onClick={downloadPDF}
-              className="w-full mt-3 bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 rounded-lg transition"
-            >
-              Download Visitor Pass (PDF)
-            </button>
-          </>
+            <div className="flex flex-col justify-between h-full space-y-4">
+              <h1 className="text-3xl text-center font-bold mt-10">
+                Visitor Details
+              </h1>
+              <div className="bg-slate-100 rounded-lg p-4 space-y-2 mt-5">
+                <p>
+                  <strong>Name:</strong> {visitor.name}
+                </p>
+                <p>
+                  <strong>Email:</strong> {visitor.email}
+                </p>
+                <p>
+                  <strong>Phone:</strong> {visitor.phone}
+                </p>
+                <p>
+                  <strong>Purpose:</strong> {visitor.purpose}
+                </p>
+                <p>
+                  <strong>Status:</strong>{" "}
+                  <span className="text-green-600 font-semibold">Approved</span>
+                </p>
+              </div>
+
+              <button
+                onClick={downloadPDF}
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 rounded-lg transition"
+              >
+                Download Visitor Pass (PDF)
+              </button>
+            </div>
+          </div>
         )}
 
         {visitor.status === "CheckedIn" && (
