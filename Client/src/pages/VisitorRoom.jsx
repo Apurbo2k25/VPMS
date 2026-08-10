@@ -100,7 +100,7 @@ function VisitorRoom() {
     // Visitor Photo Rendering
     if (visitor.photo) {
       try {
-        const photoUrl = `http://localhost:5000/uploads/${visitor.photo}`;
+        const photoUrl = `${import.meta.env.VITE_API_URL.replace("/api", "")}/uploads/${visitor.photo}`;
         const base64Photo = await loadImageAsBase64(photoUrl);
         doc.addImage(base64Photo, "JPEG", 37, currentY, 26, 26);
 

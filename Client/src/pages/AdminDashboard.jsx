@@ -169,7 +169,7 @@ function AdminDashboard() {
                     <td className="p-3">
                       {v.photo ? (
                         <img
-                          src={`http://localhost:5000/uploads/${v.photo}`}
+                          src={`${import.meta.env.VITE_API_URL.replace("/api", "")}/uploads/${v.photo}`}
                           alt={v.name}
                           className="w-12 h-12 rounded-full object-cover"
                         />

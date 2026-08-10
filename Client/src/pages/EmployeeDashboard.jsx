@@ -157,7 +157,7 @@ function EmployeeDashboard() {
                     <div className="flex items-center gap-4">
                       {visitor.photo ? (
                         <img
-                          src={`http://localhost:5000/uploads/${visitor.photo}`}
+                          src={`${import.meta.env.VITE_API_URL.replace("/api", "")}/uploads/${v.photo}`}
                           alt={visitor.name}
                           className="w-12 h-12 rounded-full object-cover border border-slate-200"
                         />
