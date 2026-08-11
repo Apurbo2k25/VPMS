@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { Camera } from "lucide-react";
+
 function RegisterVisitor() {
   const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // Added loading state
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,7 +23,7 @@ function RegisterVisitor() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Reset state
+    setError("");
 
     const { name, email, phone, hostEmployee, purpose } = formData;
 
@@ -37,8 +39,9 @@ function RegisterVisitor() {
       return;
     }
 
+    setLoading(true);
+
     try {
-      // 2. Single FormData instance
       const data = new FormData();
       data.append("name", name);
       data.append("email", email);
@@ -47,13 +50,19 @@ function RegisterVisitor() {
       data.append("purpose", purpose);
       data.append("photo", photo);
 
-      const response = await api.post("/visitors/register", data);
+      // Explicit header for multipart data
+      const response = await api.post("/visitors/register", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
       const visitorId = response.data.visitor?._id || response.data._id;
 
       localStorage.setItem("visitorId", visitorId);
       navigate(`/visitor-room/${visitorId}`);
     } catch (err) {
       setError(err.response?.data?.message || "Registration Failed!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -61,20 +70,15 @@ function RegisterVisitor() {
     const fetchEmployees = async () => {
       try {
         const res = await api.get("/users/employees");
-        setEmployees(res.data.employees || res.data);
+        const employeeData = res.data.employees || res.data;
+        setEmployees(Array.isArray(employeeData) ? employeeData : []);
       } catch (err) {
         console.error("Failed to fetch employees:", err);
+        setEmployees([]);
       }
     };
     fetchEmployees();
   }, []);
-  useEffect(() => {
-    const visitorId = localStorage.getItem("visitorId");
-
-    if (visitorId) {
-      navigate(`/visitor-room/${visitorId}`);
-    }
-  }, [navigate]);
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
@@ -145,15 +149,16 @@ function RegisterVisitor() {
               className="w-full border border-slate-300 p-2.5 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
+
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-medium flex items-center gap-2">
+            <label className="text-sm font-medium flex items-center gap-2 text-slate-700">
               <Camera className="w-4 h-4" /> Upload Visitor Photo
             </label>
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => setPhoto(e.target.files[0])}
-              className="border p-2 rounded"
+              onChange={(e) => setPhoto(e.target.files[0] || null)}
+              className="border border-slate-300 p-2 rounded-lg text-sm"
             />
           </div>
 
@@ -192,12 +197,12 @@ function RegisterVisitor() {
             ></textarea>
           </div>
 
-          {/* Removed onClick={handleRegister} so only form onSubmit runs */}
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 rounded-lg transition"
+            disabled={loading}
+            className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-medium py-2.5 rounded-lg transition"
           >
-            Submit Registration
+            {loading ? "Submitting..." : "Submit Registration"}
           </button>
 
           <div className="mt-4 text-center">
