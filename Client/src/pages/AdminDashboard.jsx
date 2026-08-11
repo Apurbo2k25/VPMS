@@ -51,6 +51,7 @@ function AdminDashboard() {
       status.includes(query)
     );
   });
+  //CSV exportation logic
   const exportCSV = () => {
     const csvData = filteredVisitors.map((v) => ({
       Name: v.name,

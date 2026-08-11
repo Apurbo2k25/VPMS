@@ -16,6 +16,7 @@ app.use(
 );
 
 app.use(express.json());
+// Serve uploaded images as static files
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 const autRoutes = require("./routes/authRoutes.js");
 app.use("/api/auth", autRoutes);

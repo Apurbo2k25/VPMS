@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
-import { AlertCircle, Camera } from "lucide-react";
+import { Camera } from "lucide-react";
 function RegisterVisitor() {
   const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);

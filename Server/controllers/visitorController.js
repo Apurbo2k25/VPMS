@@ -24,7 +24,7 @@ exports.registerVisitors = async (req, res) => {
           "You already have a pending visitor request. Please wait for approval.",
       });
     }
-    const phoneRegex = /^\d{10}$/;
+    const phoneRegex = /^\d{10}$/; // Validate exactly 10 digits
 
     if (!phoneRegex.test(phone)) {
       return res.status(400).json({

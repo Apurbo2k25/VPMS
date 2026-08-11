@@ -196,11 +196,11 @@ function EmployeeDashboard() {
                             disabled={loading === visitor._id}
                             onClick={() => handleApprove(visitor._id)}
                             className={`px-4 py-2 rounded-lg text-white
-    ${
-      loading === visitor._id
-        ? "bg-gray-400 cursor-not-allowed"
-        : "bg-emerald-600 hover:bg-emerald-700"
-    }`}
+                            ${
+                              loading === visitor._id
+                                ? "bg-gray-400 cursor-not-allowed"
+                                : "bg-emerald-600 hover:bg-emerald-700"
+                            }`}
                           >
                             {loading === visitor._id
                               ? "Approving..."
@@ -210,11 +210,11 @@ function EmployeeDashboard() {
                             disabled={loading === visitor._id}
                             onClick={() => handleReject(visitor._id)}
                             className={`px-4 py-2 rounded-lg text-white
-    ${
-      loading === visitor._id
-        ? "bg-gray-400 cursor-not-allowed"
-        : "bg-red-400 hover:bg-red-500"
-    }`}
+                            ${
+                              loading === visitor._id
+                                ? "bg-gray-400 cursor-not-allowed"
+                                : "bg-red-400 hover:bg-red-500"
+                            }`}
                           >
                             {loading === visitor._id
                               ? "Rejecting..."

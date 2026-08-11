@@ -21,7 +21,6 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
-      {/* Navbar */}
       <header className="bg-white border-b border-slate-200 py-4 px-8 flex justify-between items-center shadow-sm">
         <div className="flex items-center gap-2">
           <span className="text-2xl">🎫</span>

@@ -27,7 +27,7 @@ function Login() {
       else if (role === "security") navigate("/security");
       else navigate("/");
     } catch (error) {
-      // Captures the exact message sent from Express res.status().json({ message: "..." })
+      // Captures the exact message sent from Express
       const message =
         error.response?.data?.message ||
         "Something went wrong. Please try again.";
@@ -49,7 +49,7 @@ function Login() {
         onSubmit={handleLogin}
         className="bg-white border p-8 rounded-lg shadow-lg w-full max-w-sm flex flex-col gap-4"
       >
-        {/* 📍 General Error Banner */}
+        {/* 📍Error Banner */}
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-lg text-sm mb-4">
             ⚠️ {error}
