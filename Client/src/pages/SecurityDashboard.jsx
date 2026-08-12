@@ -93,7 +93,7 @@ function SecurityDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 ">
+    <div className="min-h-screen bg-slate-100">
       <Navbar />
 
       <div className="max-w-3xl mx-auto py-10 px-5">
@@ -105,15 +105,27 @@ function SecurityDashboard() {
           Verify visitor QR Codes before allowing entry.
         </p>
 
-        <div className="grid grid-cols-2s md:grid-cols-2 gap-6 mb-8">
+        {message && (
+          <div
+            className={`mb-6 p-4 rounded-lg text-center max-w-md mx-auto ${
+              message.type === "success"
+                ? "bg-green-100 text-green-700"
+                : "bg-red-100 text-red-700"
+            }`}
+          >
+            {message.text}
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {!scanResult && (
             <>
-              <div className="bg-white rounded-xl shadow p-6 mb-8">
+              <div className="bg-white rounded-xl shadow p-6">
                 <h2 className="font-semibold mb-4">Scan QR Code</h2>
                 <div id="reader"></div>
               </div>
 
-              <div className="bg-white rounded-xl shadow p-6 mb-8">
+              <div className="bg-white rounded-xl shadow p-6">
                 <h2 className="font-semibold mb-4">Manual Verification</h2>
                 <textarea
                   rows={5}
@@ -133,20 +145,8 @@ function SecurityDashboard() {
             </>
           )}
 
-          {message && (
-            <div
-              className={`mb-6 p-4 rounded-lg ${
-                message.type === "success"
-                  ? "bg-green-100 text-green-700"
-                  : "bg-red-100 text-red-700"
-              }`}
-            >
-              {message.text}
-            </div>
-          )}
-
           {scanResult && (
-            <div className="bg-white rounded-xl shadow p-6">
+            <div className="bg-white rounded-xl shadow p-6 col-span-full">
               <div className="flex justify-between items-center border-b pb-4 mb-4">
                 <div>
                   <h2 className="text-xl font-bold">{scanResult.name}</h2>
@@ -183,7 +183,7 @@ function SecurityDashboard() {
                     onClick={handleCheckout}
                     className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg"
                   >
-                    {loading ? "Processing..." : "Check Out Visitor"}
+                    {loading ? "Processing...!" : "Check Out Visitor"}
                   </button>
                 )}
 
